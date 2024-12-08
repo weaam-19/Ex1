@@ -22,12 +22,13 @@ public class Ex1 {
         int ans = -1;
 
 
-            return ans;
+        return ans;
     }
 
 
     /**
      * This static function checks if the given String (g) is in a valid "number" format.
+     *
      * @param a a String representing a number
      * @return true iff the given String is in a number format
      */
@@ -35,15 +36,36 @@ public class Ex1 {
 
     public static boolean isNumber(String a) {
         boolean ans = true;
+         if (!a.contains("b")) {
+               return a.matches("[0-9]+");
 
+        }
+        String[] parts = a.split("b");
 
+        if (parts.length != 2) {
+            return false;
+        }
 
+        String numberPart = parts[0];
+        String basePart = parts[1];
 
-            return ans;
+        if (numberPart.isEmpty() || !numberPart.matches("[0-9, A-G]")) {
+            return false;
+        }
 
+        if (!basePart.matches("[2-9,A-G]")) {
+            return false;
+        }
 
+        if (a == null || a.isEmpty()) return false;
 
-    }
+        if (a.startsWith("-")) return false;
+        if (a.contains(" b") || a.contains("b ")) return false;
+        if (!a.contains("b") && !a.matches("[0-9]")) return false;
+        if (a.startsWith("b")) return false;
+        return ans;
+        }
+
 
 
     /**
