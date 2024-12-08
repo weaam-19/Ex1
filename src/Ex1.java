@@ -14,28 +14,37 @@ public class Ex1 {
     /**
      * Convert the given number (num) to a decimal representation (as int).
      * It the given number is not in a valid format returns -1.
+     *
      * @param num a String representing a number in basis [2,16]
      * @return
      */
     public static int number2Int(String num) {
         int ans = -1;
-        // add your code here
 
-        ////////////////////
-        return ans;
+
+            return ans;
     }
+
+
     /**
      * This static function checks if the given String (g) is in a valid "number" format.
      * @param a a String representing a number
      * @return true iff the given String is in a number format
      */
+
+
     public static boolean isNumber(String a) {
         boolean ans = true;
-        // add your code here
 
-        ////////////////////
-        return ans;
+
+
+
+            return ans;
+
+
+
     }
+
 
     /**
      * Calculate the number representation (in basis base)
@@ -83,3 +92,5 @@ public class Ex1 {
         return ans;
     }
 }
+
+
