@@ -19,25 +19,35 @@ public class Ex1 {
      * @return
      */
     public static int number2Int(String num) {
-        int ans = -1;
+      int ans= -1;
+        if (!isNumber(num)) {
+            return -1;
+        }
+        String[] parts = num.split("b");
+        int base = parts.length == 2 ? Integer.parseInt(parts[1]) : 10; // ברירת מחדל: עשרוני
+        String numberPart = parts[0];
+        int result = 0;
 
-
-        return ans;
-    }
-
-
+        for (int i = 0; i < numberPart.length(); i++) {
+            char c = numberPart.charAt(i);
+            int digit = Character.digit(c, base);
+            if (digit < 0 || digit >= base) {
+                return -1;
+            }
+            result = result * base + digit;
+        }
+        return result;
+        }
     /**
      * This static function checks if the given String (g) is in a valid "number" format.
      *
      * @param a a String representing a number
      * @return true iff the given String is in a number format
      */
-
-
     public static boolean isNumber(String a) {
         boolean ans = true;
-         if (!a.contains("b")) {
-               return a.matches("[0-9]+");
+        if (!a.contains("b")) {
+            return a.matches("[0-9]+");
 
         }
         String[] parts = a.split("b");
@@ -63,56 +73,92 @@ public class Ex1 {
         if (a.contains(" b") || a.contains("b ")) return false;
         if (!a.contains("b") && !a.matches("[0-9]")) return false;
         if (a.startsWith("b")) return false;
-        return ans;
-        }
 
+        return ans;
+    }
 
 
     /**
      * Calculate the number representation (in basis base)
      * of the given natural number (represented as an integer).
      * If num<0 or base is not in [2,16] the function should return "" (the empty String).
-     * @param num the natural number (include 0).
+     *
+     * @param num  the natural number (include 0).
      * @param base the basis [2,16]
      * @return a String representing a number (in base) equals to num, or an empty String (in case of wrong input).
      */
     public static String int2Number(int num, int base) {
         String ans = "";
-        // add your code here
+       if (num < 0 || base < 2 || base > 16) {
+            return "";
+        }
 
-        ////////////////////
+        if (num == 0) {
+            return "0";
+        }
+
+        StringBuilder result = new StringBuilder();
+
+        while (num > 0) {
+            int remainder = num % base;
+            if (remainder < 10) {
+                result.append((char) ('0' + remainder));
+            } else {
+                result.append((char) ('A' + (remainder - 10)));
+            }
+            num /= base;
+        }
+
+        ans = result.reverse().toString();
+
         return ans;
     }
 
+
     /**
      * Checks if the two numbers have the same value.
+     *
      * @param n1 first number
      * @param n2 second number
      * @return true iff the two numbers have the same values.
      */
     public static boolean equals(String n1, String n2) {
         boolean ans = true;
-        // add your code here
+        if (n1 == null || n2 == null) {
+            return false;
+        }
 
-        ////////////////////
-        return ans;
+        if (n1.length() != n2.length()) {
+            return false;
+        }
+        return n1.equals(n2);
     }
+
 
     /**
      * This static function search for the array index with the largest number (in value).
      * In case there are more than one maximum - returns the first index.
      * Note: you can assume that the array is not null and is not empty, yet it may contain null or none-valid numbers (with value -1).
+     *
      * @param arr an array of numbers
      * @return the index in the array in with the largest number (in value).
-     *
      */
     public static int maxIndex(String[] arr) {
         int ans = 0;
-        // add your code here
-
-        ////////////////////
+        int maxValue = Integer.MIN_VALUE;
+        for (int i = 0; i < arr.length; i++) {
+            String numStr = arr[i];
+            if (numStr != null && isNumber(numStr)) {
+                int value = Ex1.number2Int(numStr);
+                if (value != -1 && value > maxValue) {
+                    maxValue = value;
+                    ans = i;
+                }
+            }
+        }
         return ans;
     }
 }
+
 
 
