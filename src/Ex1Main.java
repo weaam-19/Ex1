@@ -46,6 +46,7 @@ public class Ex1Main {
                        int number2 = Ex1.number2Int(num2);
                         System.out.println("Enter a base (between 2 and 16): ");
                         int base = sc.nextInt();
+                        sc.nextLine();
                         if (base<2 || base>16){
                             System.out.println("ERR: Invalid base! Please enter a base between 2 and 16.");
                             continue;
