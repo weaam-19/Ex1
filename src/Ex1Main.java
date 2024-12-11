@@ -1,11 +1,6 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-/**
- * Intro2CS, Ex1 - very basic "main template"
- * Make sure your implementation of this main performs as the Ex1Sol.jar solution implement all needed functions.
- *
- */
 public class Ex1Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -57,8 +52,8 @@ public class Ex1Main {
                         String convertedNumber1 = Ex1.int2Number(sum, base);
                         String convertedNumber2 = Ex1.int2Number(product, base);
 
-                      System.out.println(num1 + " + " + num2 + " = " + convertedNumber1 + "b" + base);
-                       System.out.println(num1 + " * " + num2 + " = " + convertedNumber2 + "b" + base);
+                      System.out.println(num1 + " + " + num2 + " = " + convertedNumber1 );
+                       System.out.println(num1 + " * " + num2 + " = " + convertedNumber2 );
                     String[] numbers = {String.valueOf(sum),String.valueOf(product),num1,num2} ;
                     int index = Ex1.maxIndex(numbers);
                         System.out.println("Max number over " + Arrays.toString(numbers) + " is: " + numbers[index]);

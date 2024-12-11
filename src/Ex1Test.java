@@ -3,10 +3,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-/**
- * This JUnit class represents a very partial test class for Ex1.
- * Make sure you complete all the needed JUnits
- */
 public class Ex1Test {
     @Test
     void computeNumberTest() {
@@ -35,34 +31,49 @@ public class Ex1Test {
                 assertFalse(not_ok);
             }
         }
+
+
         @Test
-        void int2NumberTest() {
-            assertEquals("1011", Ex1.int2Number(11, 2));
-            assertEquals("13", Ex1.int2Number(11, 8));
-            assertEquals("B", Ex1.int2Number(11, 16));
-            assertEquals("F", Ex1.int2Number(15, 16));
-            assertEquals("12", Ex1.int2Number(10, 8));
-            assertEquals("100", Ex1.int2Number(4, 2));
+        void int2NumberTest() { assertEquals("1011b2", Ex1.int2Number(11, 2));
+            assertEquals("13b8", Ex1.int2Number(11, 8));
+            assertEquals("BbG", Ex1.int2Number(11, 16));
+            assertEquals("FbG", Ex1.int2Number(15, 16));
+            assertEquals("12b8", Ex1.int2Number(10, 8));
+            assertEquals("100b2", Ex1.int2Number(4, 2));
+            assertEquals("1b2", Ex1.int2Number(1, 2));
+            assertEquals("BbC", Ex1.int2Number(11, 12));
+            assertEquals("AbB", Ex1.int2Number(10, 11));
+            assertEquals("0", Ex1.int2Number(0, 2));
+            assertEquals("EbG", Ex1.int2Number(14, 16));
+            assertEquals("10bA", Ex1.int2Number(10, 10));
         }
+
+
         @Test
         void maxIndexTest() {
             String[] arr1 = {"100bA", "101bA", "101bB", "110bB"};
             assertEquals(3, Ex1.maxIndex(arr1));
-
             String[] arr2 = {"1000b2", "101b2", "11bA", "110b2"};
             assertEquals(2, Ex1.maxIndex(arr2));
-
-            String[] arr3 = {"123bA", "110bB", "1011b2", "12bG"};
-            assertEquals(1, Ex1.maxIndex(arr3));
+            String[] arr3 = {"123bA", "AbB", "1011b2", "101b2"};
+            assertEquals(0, Ex1.maxIndex(arr3));
+            String[] arr4 = {"1b2", "10bA", "1bG", "F"};
+            assertEquals(3, Ex1.maxIndex(arr1));
+            String[] arr5 = {"001b2", "010bA", "0001bG", "00F"};
+            assertEquals(2, Ex1.maxIndex(arr2));
+            String[] arr6 = {"10", "abc", "101b2", "110b2"};
+            assertEquals(0, Ex1.maxIndex(arr3));
 
         }
     @Test
     void equalsTest() {
         assertTrue(Ex1.equals("11b2", "11b2"));
-
-        assertFalse(Ex1.equals("111b2", "1111b2"));
-
+        assertFalse(Ex1.equals("1011b2", "1111b2"));
         assertFalse(Ex1.equals("10bA", "100bA"));
-
-        }
+        assertTrue(Ex1.equals("1bA","1b2"));
+        assertTrue(Ex1.equals("AbG","1010b2"));
+        assertTrue(Ex1.equals("1000b3","11011b2"));
+        assertFalse(Ex1.equals("1111111b2", "11110000b3"));
+        assertFalse(Ex1.equals("111b2", "111b7"));
+    }
 }
