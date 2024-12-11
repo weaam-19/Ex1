@@ -1,4 +1,3 @@
-
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -6,13 +5,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class Ex1Test {
     @Test
     void computeNumberTest() {
+        // test converting a binary string "1011b2" to an integer
         String s2 = "1011b2";
         int v = Ex1.number2Int(s2);
         assertEquals(v, 11);
+        // test converting a base-10 string "1011bA" to an integer
         String s10 = "1011bA";
         v = Ex1.number2Int(s10);
+        // convert the result back to binary (base 2)
         s2 = Ex1.int2Number(v,2);
         int v2= Ex1.number2Int(s2);
+        // verify that the two integer values are equal
         assertEquals(v,v2);
         assertTrue(Ex1.equals(s10, s2));
     }
@@ -20,21 +23,24 @@ public class Ex1Test {
 
     @Test
         void isBasisNumberTest() {
-            String[] good = {"1", "1b2", "01b2", "123bA", "ABbG", "0bA"};
+        // array of valid numbers with different bases
+        String[] good = {"1", "1b2", "01b2", "123bA", "ABbG", "0bA"};
             for(int i=0;i<good.length;i=i+1) {
                 boolean ok = Ex1.isNumber(good[i]);
-                assertTrue(ok);
+                assertTrue(ok); // each string should be recognized as a valid number
             }
-            String[] not_good = {"b2", "2b2", "1G3bG", " BbG", "0bbA", "abB", "!@b2", "A", "1bb2"};
+        // array of invalid numbers with incorrect formats
+        String[] not_good = {"b2", "2b2", "1G3bG", " BbG", "0bbA", "abB", "!@b2", "A", "1bb2"};
             for(int i=0;i<not_good.length;i=i+1) {
                 boolean not_ok = Ex1.isNumber(not_good[i]);
-                assertFalse(not_ok);
+                assertFalse(not_ok);// each string should be recognized as an invalid number
             }
         }
 
-
         @Test
-        void int2NumberTest() { assertEquals("1011b2", Ex1.int2Number(11, 2));
+        void int2NumberTest() {
+            // test converting integers to string representations in different bases
+            assertEquals("1011b2", Ex1.int2Number(11, 2));
             assertEquals("13b8", Ex1.int2Number(11, 8));
             assertEquals("BbG", Ex1.int2Number(11, 16));
             assertEquals("FbG", Ex1.int2Number(15, 16));
@@ -51,6 +57,7 @@ public class Ex1Test {
 
         @Test
         void maxIndexTest() {
+            // test finding the index of the largest number in the array
             String[] arr1 = {"100bA", "101bA", "101bB", "110bB"};
             assertEquals(3, Ex1.maxIndex(arr1));
             String[] arr2 = {"1000b2", "101b2", "11bA", "110b2"};
@@ -67,6 +74,7 @@ public class Ex1Test {
         }
     @Test
     void equalsTest() {
+        // test if two numbers represented as strings are equal
         assertTrue(Ex1.equals("11b2", "11b2"));
         assertFalse(Ex1.equals("1011b2", "1111b2"));
         assertFalse(Ex1.equals("10bA", "100bA"));
