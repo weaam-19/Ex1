@@ -37,66 +37,73 @@ public class Ex1 {
             result = result * base + digitValue; // multiply result by base and add the current digit
         }
 
-        return result; // return the final converted integer
+        return result;
     }
 
 
     // checks if a string is a valid number with an optional base
     public static boolean isNumber(String a) {
+        // return false if the string is null or empty
         if (a == null || a.trim().isEmpty()) {
-            return false; // return false if the string is null or empty
+            return false;
         }
+
+        // return false if the string contains spaces or has leading/trailing whitespace
         if (!a.equals(a.trim()) || a.contains(" ")) {
-            return false; // return false if the string contains spaces
+            return false;
         }
 
-        if (a.contains("b")) {
-            String[] parts = a.split("b"); // split the string into number and base parts
-            if (parts.length != 2) {
-                return false;
-            }
+        // if there is no 'b', check if the string contains only digits
+        if (!a.contains("b")) {
+            return a.matches("[0-9]+");
+        }
 
-            String numberPart = parts[0];
-            String basePart = parts[1];
+        // if the string contains 'b', it should have both a number part and a base part
+        String[] parts = a.split("b");
+        if (parts.length != 2) {
+            return false;
+        }
 
-            if (numberPart.isEmpty() || !numberPart.matches("[0-9A-G]+")) {
-                return false;
-            }
+        String numberPart = parts[0];
+        String basePart = parts[1];
 
-            // check if the base part is valid (2-9, A-G)
-            if (basePart.isEmpty() || !basePart.matches("[2-9A-G]")) {
-                return false;
-            }
+        // check if the number part contains only valid characters (0-9, A-G)
+        if (numberPart.isEmpty() || !numberPart.matches("[0-9A-G]+")) {
+            return false;
+        }
 
-            int base;
-            // convert the base part to an integer
-            if (basePart.length() == 1 && basePart.charAt(0) >= 'A' && basePart.charAt(0) <= 'G') {
-                base = 10 + (basePart.charAt(0) - 'A');
+        // check if the base part is valid (2-9, A-G)
+        if (basePart.isEmpty() || !basePart.matches("[2-9A-G]")) {
+            return false;
+        }
+
+        // convert the base part to an integer
+        int base;
+        if (basePart.length() == 1 && basePart.charAt(0) >= 'A' && basePart.charAt(0) <= 'G') {
+            base = 10 + (basePart.charAt(0) - 'A');
+        } else {
+            base = Integer.parseInt(basePart);
+        }
+
+        // check if all characters in the number part are valid in the given base
+        for (char c : numberPart.toCharArray()) {
+            int value;
+            if (c >= '0' && c <= '9') {
+                value = c - '0';
+            } else if (c >= 'A' && c <= 'G') {
+                value = 10 + (c - 'A');
             } else {
-                base = Integer.parseInt(basePart);
+                return false;
             }
 
-            // check if all characters in the number part are valid in the given base
-            for (char c : numberPart.toCharArray()) {
-                int value;
-                if (c >= '0' && c <= '9') {
-                    value = c - '0';
-                } else if (c >= 'A' && c <= 'G') {
-                    value = 10 + (c - 'A');
-                } else {
-                    return false;
-                }
-
-                if (value < 0 || value >= base) {
-                    return false; // return false if the character is not valid in the given base
-                }
+            if (value >= base) {
+                return false;
             }
-
-            return true; // return true if all checks pass
         }
 
-        return a.matches("[0-9]+"); // return true if the string contains only digits
+        return true;
     }
+
 
 
 

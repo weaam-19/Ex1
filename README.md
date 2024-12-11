@@ -2,7 +2,6 @@
 The Ex1 class offers a set of tools for handling numbers represented as strings
 in various bases, ranging from base 2 (binary) to base 16 (hexadecimal).
 It provides methods to:
-
 convert numbers between different bases.
 Verify if a string represents a valid number in a given base.
 Compare numbers in string format.
